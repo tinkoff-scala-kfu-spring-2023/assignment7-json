@@ -12,5 +12,5 @@ object Person {
     def salary: Double
   }
   case class Employee(name: String, age: Int, salary: Double) extends Worker
-  case class Manager(name: String, age: Int, salary: Double, employees: List[Employee]) extends Worker
+  case class Manager(name: String, age: Int, salary: Double, employees: List[Employee], boss: Option[Manager]) extends Worker
 }
