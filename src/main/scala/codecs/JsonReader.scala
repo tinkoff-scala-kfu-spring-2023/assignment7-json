@@ -1,7 +1,7 @@
 package codecs
 
 trait JsonReader[A] {
-  def read(json: Json): Either[List[ReaderError], A]
+  def read(json: Json): Either[ReaderError, A]
 }
 
 object JsonReader {
