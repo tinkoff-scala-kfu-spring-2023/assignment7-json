@@ -11,7 +11,7 @@
 ```scala=
 sealed trait Json
 object Json {
-  final case object JsonNull extends Json
+  final case object JsonNull extends Json // Нужен для кодирования опциональных полей
   final case class JsonString(value: String) extends Json
   final case class JsonInt(value: Int) extends Json
   final case class JsonDouble(value: Double) extends Json
