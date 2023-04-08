@@ -1,6 +1,6 @@
 package codecs
 
-import cats.implicits._
+import cats.syntax.show._
 import codecs.Json._
 import codecs.JsonReader._
 import codecs.JsonWriter._
@@ -31,6 +31,10 @@ class CodecsSpec extends AnyFlatSpec with Matchers {
 
   "double" should "be read from JsonDouble" in {
     JsonDouble(2.5).as[Double] shouldEqual Right(2.5)
+  }
+  
+  "None" should "parsed as JsonNull" in {
+    None.toJson shouldEqual JsonNull
   }
 
   "list of strings" should "be parsed as json value" in {
@@ -166,5 +170,12 @@ class CodecsSpec extends AnyFlatSpec with Matchers {
     ).as[Manager] shouldEqual Left(errors)
   }
 
+   "student" should "be parsed as person if there is no codec for student in scope" in {
+      case class StudentTest(name: String, age: Int, university: University) extends Person
+      StudentTest("Max", 21, University("Inno", "Inno", "Russia", 214)).toJson shouldEqual JsonObject(
+        Map("name" -> JsonString("Max"), "age" -> JsonInt(21)
+      )
+    )
+  }
 
 }
