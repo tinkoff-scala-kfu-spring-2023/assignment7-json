@@ -33,8 +33,12 @@ class CodecsSpec extends AnyFlatSpec with Matchers {
     JsonDouble(2.5).as[Double] shouldEqual Right(2.5)
   }
   
-  "None" should "parsed as JsonNull" in {
+  "None" should "be parsed as JsonNull" in {
     None.toJson shouldEqual JsonNull
+  }
+  
+  "null" should "be read as None" in {
+    JsonNull.as[Option[Int]] shouldEqual None
   }
 
   "list of strings" should "be parsed as json value" in {
